@@ -17,8 +17,6 @@ public class Firepit : MonoBehaviour
 
     //[Tooltip("Usar o codigo de cores: 0 = Vermelho| 1 = Branco| 2 = Azul| 3 = Amarelo| 4 = Preto| 5 = Rosa| 6 = Verde")]
     //public int colorCode;
-    public enum enumColorCode { Vermelho, Branco, Azul, Amarelo, Preto, Rosa, Verde }
-    public enumColorCode chosenColorCode;
     [Range(0,7)]
     public int colorCode;
     [Tooltip("0 = topo esquerda| 1 = topo centro| 2 = topo direita| 3 = baixo esquerda| 4 = baixo centro| 5 = baixo direita")]
@@ -26,37 +24,21 @@ public class Firepit : MonoBehaviour
     public int position;
     [SerializeField]
     private FirePitPuzzleManager manager;
-    private bool listening;
+    public bool listening;
 
-    private void Start()
+    private void Update()
     {
-        switch (chosenColorCode)
+        if (listening)
         {
-            case enumColorCode.Vermelho:
-                colorCode = 0;
-                break;
-            case enumColorCode.Branco:
-                colorCode = 1;
-                break;
-            case enumColorCode.Azul:
-                colorCode = 2;
-                break;
-            case enumColorCode.Amarelo:
-                colorCode = 3;
-                break;
-            case enumColorCode.Preto:
-                colorCode = 4;
-                break;
-            case enumColorCode.Rosa:
-                colorCode = 5;
-                break;
-            case enumColorCode.Verde:
-                colorCode = 6;
-                break;
-            default:
-                colorCode = 7;
-                break;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                manager.Interact(position);
+            }
         }
+    }
+
+    public void Setup()
+    {
         Material mt = GetComponentInChildren<MeshRenderer>().material;
         switch (colorCode)
         {
@@ -86,16 +68,6 @@ public class Firepit : MonoBehaviour
                 break;
         }
         listening = false;
-    }
-    private void Update()
-    {
-        if (listening)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                manager.Interact(position);
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)

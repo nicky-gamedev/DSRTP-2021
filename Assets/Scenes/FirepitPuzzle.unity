@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a5080be4b137b42a1cea54502e768d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenColorCode: 0
+  chosenColorCode: 1
   colorCode: 2
   position: 0
   manager: {fileID: 1101931517}
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a5080be4b137b42a1cea54502e768d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenColorCode: 0
+  chosenColorCode: 5
   colorCode: 2
   position: 4
   manager: {fileID: 1101931517}
@@ -855,7 +855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a5080be4b137b42a1cea54502e768d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenColorCode: 0
+  chosenColorCode: 2
   colorCode: 2
   position: 1
   manager: {fileID: 1101931517}
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a5080be4b137b42a1cea54502e768d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenColorCode: 0
+  chosenColorCode: 4
   colorCode: 2
   position: 3
   manager: {fileID: 1101931517}
@@ -1067,12 +1067,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepits:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 19095117}
+  - {fileID: 948095029}
+  - {fileID: 1573571954}
+  - {fileID: 1088123889}
+  - {fileID: 122062991}
+  - {fileID: 117610124}
+  door: {fileID: 1831393928}
 --- !u!4 &1101931518
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a5080be4b137b42a1cea54502e768d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenColorCode: 0
+  chosenColorCode: 3
   colorCode: 2
   position: 2
   manager: {fileID: 1101931517}
@@ -1783,7 +1784,7 @@ GameObject:
   - component: {fileID: 1831393930}
   - component: {fileID: 1831393929}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

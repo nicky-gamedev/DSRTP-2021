@@ -16,11 +16,22 @@ public class FirePitPuzzleManager : MonoBehaviour
      */
     [SerializeField]
     private Firepit[] firepits = new Firepit[6];
+    [SerializeField]
+    private GameObject door;
+
+
+    private void Start()
+    {
+        SetupFires(firepits);
+    }
+
+
     public void Interact(int position)
     {
         if (CheckInteraction(position, firepits))
         {
-            Debug.LogError("Certo");
+            door.SetActive(false);
+            DeactivateFire(firepits);
         }
         else
         {
@@ -89,5 +100,23 @@ public class FirePitPuzzleManager : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    private void DeactivateFire(Firepit[] fps)
+    {
+        foreach (Firepit fp in fps)
+        {
+            fp.listening = false;
+            fp.enabled = false;
+        }
+    }
+
+    private void SetupFires(Firepit[] fps)
+    {
+        foreach (Firepit fp in fps)
+        {
+            fp.colorCode = Random.Range(0, 6);
+            fp.Setup();
+        }
     }
 }
