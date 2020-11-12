@@ -53,6 +53,8 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        if (hit.transform.gameObject == actualFloor) return;
+
         actualFloor = hit.gameObject.transform;
     }
 }

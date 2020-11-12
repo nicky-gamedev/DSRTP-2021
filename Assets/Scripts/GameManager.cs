@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    
     public float timeRemaining;
     private float fullTime = 300f;
     public int ActualTime { get { return Mathf.RoundToInt(timeRemaining); } }
@@ -11,6 +13,7 @@ public class GameManager : MonoBehaviour
     {
         timeRemaining = fullTime;
         DontDestroyOnLoad(this);
+        instance = this;
     }
 
     void Update()
