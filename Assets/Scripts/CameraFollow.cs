@@ -21,6 +21,9 @@ public class CameraFollow : MonoBehaviour
     Camera cam = null;
     CharacterController controller;
     CharacterControllerSimpleConfig config;
+
+    [SerializeField] float smoothTime = .5f;
+    [SerializeField] float maxSpeed = 50f;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -66,7 +69,7 @@ public class CameraFollow : MonoBehaviour
         }
 
         Vector3 vel = new Vector3();
-        transform.position = Vector3.SmoothDamp(transform.position, lastPosToLerp, ref vel, .05f, 50f);
+        transform.position = Vector3.SmoothDamp(transform.position, lastPosToLerp, ref vel, smoothTime, maxSpeed);
     }
     #endregion
 }

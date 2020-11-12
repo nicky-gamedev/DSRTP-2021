@@ -20,7 +20,7 @@ public class FirePitPuzzleManager : MonoBehaviour
     private GameObject door;
 
 
-    private void Start()
+    private void OnEnable()
     {
         SetupFires(firepits);
     }
