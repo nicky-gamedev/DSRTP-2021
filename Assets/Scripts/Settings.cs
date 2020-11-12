@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
 {
     Resolution[] resolutions;
     public Dropdown resDropdown;
+    public Slider master, music, fx;
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -29,6 +30,20 @@ public class Settings : MonoBehaviour
 
         resDropdown.value = currentRes;
         resDropdown.RefreshShownValue();
+
+        // Aplicar o que tiver guardado de som nos sliders
+        if (PlayerPrefs.HasKey("MasterVolume"))
+        {
+            master.value = PlayerPrefs.GetFloat("MasterVolume");
+        }
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
+            music.value = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        if (PlayerPrefs.HasKey("FXVolume"))
+        {
+            fx.value = PlayerPrefs.GetFloat("FXVolume");
+        }
     }
 
     #region Volume Sliders
@@ -36,15 +51,18 @@ public class Settings : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         audioMixer.SetFloat("MasterVolume", volume);
+        PlayerPrefs.SetFloat("MasterVolume", volume);
     }
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", volume);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
     }
 
     public void SetFXVolume(float volume)
     {
         audioMixer.SetFloat("FXVolume", volume);
+        PlayerPrefs.SetFloat("FXVolume", volume);
     }
     #endregion
 

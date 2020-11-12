@@ -6505,4 +6505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resDropdown: {fileID: 1714796667}
+  master: {fileID: 1839856592}
+  music: {fileID: 940522990}
+  fx: {fileID: 676592734}
   audioMixer: {fileID: 24100000, guid: 5d474fa33c3303947a0f94a398bfdfa8, type: 2}
