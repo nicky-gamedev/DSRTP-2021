@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 401350229}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actualFloor: {fileID: 583163881}
-  speed: 8
-  impulseJump: 4
-  gravity: -17
+  speed: 12
+  impulseJump: 8
+  gravity: -30
   moveDirection: {x: 0, y: 0, z: 0}
   verticalDirection: {x: 0, y: 0, z: 0}
 --- !u!143 &401350230
@@ -817,8 +817,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfIterations: 20
   puzzleChance: 71
-  elevationChance: 0
-  maxJumpHeight: 0
   offset: {x: 35, y: 0, z: 0}
   floor: {fileID: 2376311493484489588, guid: 76deb4e295440db4dac8ced3fa1ec52b, type: 3}
   platform: {fileID: 0}
@@ -826,6 +824,7 @@ MonoBehaviour:
   - {fileID: 334069516220594159, guid: 53feb45088df7894996e9d69006bfa72, type: 3}
   puzzlePrefabs:
   - {fileID: 6049184439856744007, guid: 91c8fcee2fa984747a3b4b6ef50534ab, type: 3}
+  - {fileID: 1798806260466782966, guid: 2c4ffe00b0b267945b70dc86f97b4a39, type: 3}
 --- !u!4 &1112993971
 Transform:
   m_ObjectHideFlags: 0
