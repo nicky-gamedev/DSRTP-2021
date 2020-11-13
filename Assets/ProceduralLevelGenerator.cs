@@ -24,15 +24,15 @@ public class ProceduralLevelGenerator : MonoBehaviour
 
         int floorSeq = 0;
         int puzzleSeq = 0;
-        int elevationSeq = 0;
 
         for (int i = 0; i < numberOfIterations; i++)
         {
             Debug.Log("Instantiating...");
             GameObject _floor = Instantiate(floor, transform);
-            _floor.transform.position = transform.position + offset * i;
+            var collider = floor.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds.max;
+            _floor.transform.position = new Vector3(transform.position.x + collider.x * i, transform.position.y, transform.position.z);
 
-            
+
             int probability = Random.Range(0, 100);
 
             if (probability < puzzleChance && puzzleSeq < 2)
@@ -43,7 +43,7 @@ public class ProceduralLevelGenerator : MonoBehaviour
             }
             else if(floorSeq < 2)
             {
-                GameObject level = Instantiate(levelPrefabs[Random.Range(0, puzzlePrefabs.Count)], _floor.transform);
+                GameObject level = Instantiate(levelPrefabs[Random.Range(0, levelPrefabs.Count)], _floor.transform);
                 puzzleSeq = 0;
                 floorSeq++;
             }
