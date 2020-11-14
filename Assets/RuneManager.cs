@@ -16,59 +16,50 @@ public class RuneManager : MonoBehaviour
 
     [SerializeField] List<char> pickedRuneGroup;
     [SerializeField] List<Rune> gameRunes;
-
     [SerializeField] List<int> orderList;
 
     public bool won;
+    public int position;
     public GameObject door;
 
     void OnEnable()
     {
         pickedRuneGroup = allRunes[Random.Range(0, allRunes.Count)].runes;
         gameRunes = GetComponentsInChildren<Rune>().ToList();
+        var rnd = new System.Random();
+        gameRunes = gameRunes.OrderBy(item => rnd.Next()).ToList();
 
         List<char> characterList = new List<char>();
         foreach (var item in gameRunes)
         {
+            int randomRange;
             do
             {
-                int randomRange = Random.Range(0, gameRunes.Count);
+                randomRange = Random.Range(0, pickedRuneGroup.Count);
                 item.text = pickedRuneGroup[randomRange];
-                item.order = randomRange;
             } while (characterList.Contains(item.text));
 
             characterList.Add(item.text);
+            orderList.Add(randomRange);
         }
     }
 
     public void CheckOrder(Rune rune)
     {
-        bool error = false;
-        foreach (var item in gameRunes)
-        {
-            if (rune.selected) continue;
-
-            if (rune.order <= item.order) continue;
-
-            if (orderList.Contains(item.order))
-            {
-                error = true;
-                break;
-            }
-        }
+        bool error = !(rune.text == pickedRuneGroup[orderList[position]]);
 
         if (error)
         {
-            orderList.Clear();
+            position = 0;
             foreach (var item in gameRunes)
             {
                 item.selected = false;
             }
             GameManager.instance.Strike();
         }
-        else orderList.Add(rune.order);
+        else position++;
 
-        if (orderList.Count == 4 && !won)
+        if (position >= 4 && !won)
         {
             won = true;
             door.SetActive(false);
