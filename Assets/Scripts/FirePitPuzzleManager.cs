@@ -35,7 +35,7 @@ public class FirePitPuzzleManager : MonoBehaviour
         }
         else
         {
-            GameManager.instance.Strike();
+            GameObject.FindObjectOfType<GameManager>().Strike();
         }
     }
 
