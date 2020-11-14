@@ -16,6 +16,7 @@ public class ProceduralLevelGenerator : MonoBehaviour
     [SerializeField] GameObject platform;
     [SerializeField] List<GameObject> levelPrefabs;
     [SerializeField] List<GameObject> puzzlePrefabs;
+    [SerializeField] GameObject end;
     #endregion
 
     void Start()
@@ -55,7 +56,13 @@ public class ProceduralLevelGenerator : MonoBehaviour
                 floorSeq = 0;
             }
         }
+        Debug.Log("Instantiating...");
+        GameObject _end_floor = Instantiate(floor, transform);
+        var _collider = floor.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds.max;
+        _end_floor.transform.position = new Vector3(transform.position.x + _collider.x * numberOfIterations * 2, transform.position.y, transform.position.z);
         Debug.Log("Finished Level generation, with a max sequence of " + puzzleSeq + "puzzles and " + floorSeq + " levels");
+
+        GameObject end_level = Instantiate(end, _end_floor.transform);
 
         GameManager gm = GameManager.instance;
         gm.timeRemaining = gm.fullTime;

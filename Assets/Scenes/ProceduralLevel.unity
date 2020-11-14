@@ -198,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e3a0d74fdb2085443b2a93b22f1f40a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -310,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e3a0d74fdb2085443b2a93b22f1f40a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -695,6 +695,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -780,12 +781,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 401350233}
-  minPercentage: 0.125
-  maxPercentage: 0.875
+  minPercentage: 0.2
+  maxPercentage: 0.7
   image: {fileID: 782980439}
   lastPosToLerp: {x: 0, y: 0, z: 0}
-  smoothTime: 0.03
-  maxSpeed: 75
+  smoothTime: 0.05
+  maxSpeed: 60
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1112993969
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,9 +854,11 @@ MonoBehaviour:
   platform: {fileID: 0}
   levelPrefabs:
   - {fileID: 4894036962168846654, guid: 1e3256fc7535a344daf45f54c23f2502, type: 3}
+  - {fileID: 4111207227345606740, guid: 77173fe8a38b069499685be22a6cfe89, type: 3}
   puzzlePrefabs:
   - {fileID: 3835000699997493787, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
   - {fileID: 1798806260466782966, guid: 2c4ffe00b0b267945b70dc86f97b4a39, type: 3}
+  end: {fileID: 2803182537910343130, guid: f47b5b12497fb9b48a31ccbc902873ca, type: 3}
 --- !u!4 &1112993971
 Transform:
   m_ObjectHideFlags: 0
@@ -1064,7 +1098,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e3a0d74fdb2085443b2a93b22f1f40a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
