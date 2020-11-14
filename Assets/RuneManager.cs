@@ -46,11 +46,15 @@ public class RuneManager : MonoBehaviour
         bool error = false;
         foreach (var item in gameRunes)
         {
-            if (item.selected) continue;
+            if (rune.selected) continue;
 
-            if (rune.order < item.order) continue;
+            if (rune.order <= item.order) continue;
 
-            error = true;
+            if (orderList.Contains(item.order))
+            {
+                error = true;
+                break;
+            }
         }
 
         if (error)

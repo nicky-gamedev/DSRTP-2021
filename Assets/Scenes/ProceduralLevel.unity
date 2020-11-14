@@ -821,7 +821,7 @@ MonoBehaviour:
   floor: {fileID: 2376311493484489588, guid: 76deb4e295440db4dac8ced3fa1ec52b, type: 3}
   platform: {fileID: 0}
   levelPrefabs:
-  - {fileID: 334069516220594159, guid: 53feb45088df7894996e9d69006bfa72, type: 3}
+  - {fileID: 4894036962168846654, guid: 1e3256fc7535a344daf45f54c23f2502, type: 3}
   puzzlePrefabs:
   - {fileID: 3835000699997493787, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
   - {fileID: 1798806260466782966, guid: 2c4ffe00b0b267945b70dc86f97b4a39, type: 3}
