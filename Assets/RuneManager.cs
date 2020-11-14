@@ -20,6 +20,8 @@ public class RuneManager : MonoBehaviour
     [SerializeField] List<int> orderList;
 
     public bool won;
+    public int position;
+    public GameObject door;
 
     private void Update()
     {
@@ -32,41 +34,70 @@ public class RuneManager : MonoBehaviour
     {
         pickedRuneGroup = allRunes[Random.Range(0, allRunes.Count)].runes;
         gameRunes = GetComponentsInChildren<Rune>().ToList();
+        var rnd = new System.Random();
+        gameRunes = gameRunes.OrderBy(item => rnd.Next()).ToList();
 
         List<char> characterList = new List<char>();
         foreach (var item in gameRunes)
         {
+            int randomRange;
             do
             {
-                int randomRange = Random.Range(0, gameRunes.Count);
+                randomRange = Random.Range(0, pickedRuneGroup.Count);
                 item.text = pickedRuneGroup[randomRange];
-                item.order = randomRange;
             } while (characterList.Contains(item.text));
 
             characterList.Add(item.text);
+            orderList.Add(randomRange);
         }
+
+        orderList = Sort(orderList);
     }
 
     public void CheckOrder(Rune rune)
     {
-        bool error = false;
-        foreach (var item in gameRunes)
-        {
-            if (item.selected) continue;
-
-            if (rune.order < item.order) continue;
-
-            error = true;
-        }
-
+        bool error = !(rune.text == pickedRuneGroup[orderList[position]]);
         if (error)
         {
             orderList.Clear();
+            position = 0;
             foreach (var item in gameRunes)
             {
                 item.selected = false;
             }
+            GameManager.instance.Strike();
         }
-        else orderList.Add(rune.order);
+        else position++;
+
+        if (position >= 4 && !won)
+        {
+            won = true;
+            door.SetActive(false);
+        }
+    }
+
+    List<int> Sort(List<int> data)
+    {
+        int i, j;
+        int N = data.Count;
+
+        for (j = 1; j < N; j++)
+        {
+            for (i = j; i > 0 && data[i] < data[i - 1]; i--)
+            {
+                exchange(data, i, i - 1);
+            }
+        }
+
+        return data;
+    }
+
+    void exchange(List<int> data, int m, int n)
+    {
+        int temporary;
+
+        temporary = data[m];
+        data[m] = data[n];
+        data[n] = temporary;
     }
 }
