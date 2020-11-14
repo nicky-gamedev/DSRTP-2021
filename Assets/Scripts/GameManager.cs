@@ -4,14 +4,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
+
     public float timeRemaining;
     public float fullTime = 300f;
     public bool counting;
     public int ActualTime { get { return Mathf.RoundToInt(timeRemaining); } }
 
-    private void Awake()
+    private TimeTree timeTree;
+
+    private void OnEnable()
     {
+        DontDestroyOnLoad(this);
         if (instance != this && instance != null)
         {
             Destroy(this.gameObject);
@@ -20,9 +23,9 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        DontDestroyOnLoad(this);
+        timeTree = FindObjectOfType<TimeTree>();
     }
 
     void Update()
@@ -33,21 +36,40 @@ public class GameManager : MonoBehaviour
 
             //Folhas virando loucuras
 
-            if (fullTime - 120f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 60f)
+            if (timeTree.activeLeafs[4] && fullTime - 121f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 60f)
             {
-                //diminui folha
+                Debug.Log("Removing leaf 4");
+                timeTree.RemoveLeaf(4);
             }
-            else if (fullTime - 180f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 120f)
+            else if (timeTree.activeLeafs[3] && fullTime - 181f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 120f)
             {
-                //diminui folha
+                Debug.Log("Removing leaf 3");
+                timeTree.RemoveLeaf(4);
+                timeTree.RemoveLeaf(3);
             }
-            else if (fullTime - 240f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 180f)
+            else if (timeTree.activeLeafs[2] && fullTime - 241f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 180f)
             {
-                //diminui folha
+                Debug.Log("Removing leaf 2");
+                timeTree.RemoveLeaf(4);
+                timeTree.RemoveLeaf(3);
+                timeTree.RemoveLeaf(2);
             }
-            else if (fullTime - 300f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 240f)
+            else if (timeTree.activeLeafs[1] && fullTime - 271f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 240f)
             {
-                //diminui folha
+                Debug.Log("Removing leaf 1");
+                timeTree.RemoveLeaf(4);
+                timeTree.RemoveLeaf(3);
+                timeTree.RemoveLeaf(2);
+                timeTree.RemoveLeaf(1);
+            }
+            else if (timeTree.activeLeafs[0] && fullTime - 300f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 270f)
+            {
+                Debug.Log("Removing leaf 0");
+                timeTree.RemoveLeaf(4);
+                timeTree.RemoveLeaf(3);
+                timeTree.RemoveLeaf(2);
+                timeTree.RemoveLeaf(1);
+                timeTree.RemoveLeaf(0);
             }
         }
         if (timeRemaining < 0)
