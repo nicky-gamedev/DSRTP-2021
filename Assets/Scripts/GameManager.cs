@@ -6,41 +6,51 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public float timeRemaining;
-    private float fullTime = 300f;
+    public float fullTime = 300f;
+    public bool counting;
     public int ActualTime { get { return Mathf.RoundToInt(timeRemaining); } }
 
     private void OnEnable()
     {
-        timeRemaining = fullTime;
         DontDestroyOnLoad(this);
+        if (instance != this && instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         instance = this;
     }
 
     void Update()
     {
-        timeRemaining -= Time.deltaTime;
-        if (timeRemaining <= 0)
+        if (counting)
+        {
+            timeRemaining -= Time.deltaTime;
+
+            //Folhas virando loucuras
+
+            if (fullTime - 120f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 60f)
+            {
+                //diminui folha
+            }
+            else if (fullTime - 180f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 120f)
+            {
+                //diminui folha
+            }
+            else if (fullTime - 240f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 180f)
+            {
+                //diminui folha
+            }
+            else if (fullTime - 300f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 240f)
+            {
+                //diminui folha
+            }
+        }
+        if (timeRemaining < 0)
         {
             SceneManager.LoadScene(0);
-        }
-
-        //Folhas virando loucuras
-
-        if (fullTime - 120f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 60f)
-        {
-            //diminui folha
-        }
-        else if (fullTime - 180f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 120f)
-        {
-            //diminui folha
-        }
-        else if (fullTime - 240f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 180f)
-        {
-            //diminui folha
-        }
-        else if (fullTime - 300f < Mathf.RoundToInt(timeRemaining) && Mathf.RoundToInt(timeRemaining) < fullTime - 240f)
-        {
-            //diminui folha
+            counting = false;
+            timeRemaining = 0;
         }
     }
 

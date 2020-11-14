@@ -16,6 +16,7 @@ public class ProceduralLevelGenerator : MonoBehaviour
     [SerializeField] GameObject platform;
     [SerializeField] List<GameObject> levelPrefabs;
     [SerializeField] List<GameObject> puzzlePrefabs;
+    [SerializeField] GameObject end;
     #endregion
 
     void Start()
@@ -24,34 +25,47 @@ public class ProceduralLevelGenerator : MonoBehaviour
 
         int floorSeq = 0;
         int puzzleSeq = 0;
-        int elevationSeq = 0;
 
         for (int i = 0; i < numberOfIterations; i++)
         {
             Debug.Log("Instantiating...");
             GameObject _floor = Instantiate(floor, transform);
-            _floor.transform.position = transform.position + offset * i;
+            var collider = floor.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds.max;
+            _floor.transform.position = new Vector3(transform.position.x + collider.x * i * 2, transform.position.y, transform.position.z);
 
-            
+
             int probability = Random.Range(0, 100);
 
-            if (probability < puzzleChance && puzzleSeq < 2)
+            if (probability < puzzleChance && puzzleSeq < 1)
             {
                 GameObject puzzle = Instantiate(puzzlePrefabs[Random.Range(0, puzzlePrefabs.Count)], _floor.transform);
                 puzzleSeq++;
                 floorSeq = 0;
+                continue;
             }
-            else if(floorSeq < 2)
+            else if(floorSeq < 1)
             {
-                GameObject level = Instantiate(levelPrefabs[Random.Range(0, puzzlePrefabs.Count)], _floor.transform);
+                GameObject level = Instantiate(levelPrefabs[Random.Range(0, levelPrefabs.Count)], _floor.transform);
                 puzzleSeq = 0;
                 floorSeq++;
+                continue;
             }
             else
             {
-                Debug.LogWarning("Both variables are greater than 2, something went wrong?");
+                GameObject level = Instantiate(levelPrefabs[Random.Range(0, levelPrefabs.Count)], _floor.transform);
+                floorSeq = 0;
             }
         }
+        Debug.Log("Instantiating...");
+        GameObject _end_floor = Instantiate(floor, transform);
+        var _collider = floor.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds.max;
+        _end_floor.transform.position = new Vector3(transform.position.x + _collider.x * numberOfIterations * 2, transform.position.y, transform.position.z);
         Debug.Log("Finished Level generation, with a max sequence of " + puzzleSeq + "puzzles and " + floorSeq + " levels");
+
+        GameObject end_level = Instantiate(end, _end_floor.transform);
+
+        GameManager gm = GameManager.instance;
+        gm.timeRemaining = gm.fullTime;
+        gm.counting = true;
     }
 }
