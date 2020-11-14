@@ -30,28 +30,35 @@ public class ProceduralLevelGenerator : MonoBehaviour
             Debug.Log("Instantiating...");
             GameObject _floor = Instantiate(floor, transform);
             var collider = floor.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds.max;
-            _floor.transform.position = new Vector3(transform.position.x + collider.x * i, transform.position.y, transform.position.z);
+            _floor.transform.position = new Vector3(transform.position.x + collider.x * i * 2, transform.position.y, transform.position.z);
 
 
             int probability = Random.Range(0, 100);
 
-            if (probability < puzzleChance && puzzleSeq < 2)
+            if (probability < puzzleChance && puzzleSeq < 1)
             {
                 GameObject puzzle = Instantiate(puzzlePrefabs[Random.Range(0, puzzlePrefabs.Count)], _floor.transform);
                 puzzleSeq++;
                 floorSeq = 0;
+                continue;
             }
-            else if(floorSeq < 2)
+            else if(floorSeq < 1)
             {
                 GameObject level = Instantiate(levelPrefabs[Random.Range(0, levelPrefabs.Count)], _floor.transform);
                 puzzleSeq = 0;
                 floorSeq++;
+                continue;
             }
             else
             {
-                Debug.LogWarning("Both variables are greater than 2, something went wrong?");
+                GameObject level = Instantiate(levelPrefabs[Random.Range(0, levelPrefabs.Count)], _floor.transform);
+                floorSeq = 0;
             }
         }
         Debug.Log("Finished Level generation, with a max sequence of " + puzzleSeq + "puzzles and " + floorSeq + " levels");
+
+        GameManager gm = GameManager.instance;
+        gm.timeRemaining = gm.fullTime;
+        gm.counting = true;
     }
 }

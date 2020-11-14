@@ -20,14 +20,8 @@ public class RuneManager : MonoBehaviour
     [SerializeField] List<int> orderList;
 
     public bool won;
+    public GameObject door;
 
-    private void Update()
-    {
-        if(orderList.Count == 4)
-        {
-            won = true;
-        }
-    }
     void OnEnable()
     {
         pickedRuneGroup = allRunes[Random.Range(0, allRunes.Count)].runes;
@@ -66,7 +60,14 @@ public class RuneManager : MonoBehaviour
             {
                 item.selected = false;
             }
+            GameManager.instance.Strike();
         }
         else orderList.Add(rune.order);
+
+        if (orderList.Count == 4 && !won)
+        {
+            won = true;
+            door.SetActive(false);
+        }
     }
 }
