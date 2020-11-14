@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5277215530243629153}
   - component: {fileID: 7670967518417151760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1735767690929879614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Firepit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2350277619256011629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirepitPuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1908752069254731136}
   - component: {fileID: 8171266245067827457}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6023750441722259503}
   - component: {fileID: 8220491605427227328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4106356337356180877}
   - component: {fileID: 1169617284221421835}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6682595070962151778}
   - component: {fileID: 8748097596649677475}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8015635806490526650}
   - component: {fileID: 1625256981922893656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 9100099049704807941}
   - component: {fileID: 9100099049704807942}
   - component: {fileID: 9100099049704807940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fogueira3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9100099049728708105}
   - component: {fileID: 9100099049728708106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirepitManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 9100099049789841540}
   - component: {fileID: 9100099049789841541}
   - component: {fileID: 9100099049789841542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fogueira2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1567,7 +1567,7 @@ GameObject:
   - component: {fileID: 9100099050687669607}
   - component: {fileID: 9100099050687669624}
   - component: {fileID: 9100099050687669625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fogueira4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1630,7 +1630,7 @@ GameObject:
   - component: {fileID: 9100099050692131706}
   - component: {fileID: 9100099050692131707}
   - component: {fileID: 9100099050692131708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fogueira5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1774,7 +1774,7 @@ GameObject:
   - component: {fileID: 9100099050794808249}
   - component: {fileID: 9100099050794808250}
   - component: {fileID: 9100099050794808251}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fogueira0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1837,7 +1837,7 @@ GameObject:
   - component: {fileID: 9100099051455505857}
   - component: {fileID: 9100099051455505858}
   - component: {fileID: 9100099051455505859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fogueira1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

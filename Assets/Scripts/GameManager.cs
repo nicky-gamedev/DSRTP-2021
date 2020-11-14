@@ -10,15 +10,19 @@ public class GameManager : MonoBehaviour
     public bool counting;
     public int ActualTime { get { return Mathf.RoundToInt(timeRemaining); } }
 
-    private void OnEnable()
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
         if (instance != this && instance != null)
         {
             Destroy(this.gameObject);
             return;
         }
         instance = this;
+    }
+
+    private void OnEnable()
+    {
+        DontDestroyOnLoad(this);
     }
 
     void Update()

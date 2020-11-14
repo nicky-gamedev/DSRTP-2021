@@ -23,13 +23,17 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(controller.isGrounded);
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         moveDirection = Vector3.right * x + Vector3.forward * z;
-        var look = Quaternion.LookRotation(moveDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, look, 0.05f);
+
+        if (!moveDirection.Equals(Vector3.zero))
+        {
+            var look = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look, 0.05f);
+        }
+
 
         if (!controller.isGrounded)
         {
@@ -41,7 +45,6 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
 
             if (Input.GetButton("Jump"))
             {
-                Debug.Log("valid jump");
                 verticalDirection.y = Mathf.Sqrt(impulseJump * -2 * gravity);
             }
         }
