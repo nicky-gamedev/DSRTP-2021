@@ -1,47 +1,80 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBrain : MonoBehaviour
 {
-    public enum States { IDLE, MOVING, ATTACK, WAITING }
+    public enum States { IDLE, MOVING, LOAD, ATTACK, WAITING, FALLING }
+
+
+    [Header("References")]
     public GameObject target;
+    public GameObject floorSensor;
 
     [Header("Parameters")]
     [SerializeField] float detectionRange;
     [SerializeField] float attackRadius;
+    [SerializeField] float attackDelay;
     [SerializeField] float attackCooldown;
     [SerializeField] LayerMask ignoreLayer;
 
     [Header("Debug")]
     [SerializeField] bool showGizmos;
 
-    float lastAttackTime;
-    float nextAttackTime;
+    float nextActionTime;
+    bool canAttack;
     
-    public States UpdateBrain()
+    public States UpdateBrain(Enemy enemy)
     {
+        //SECURITY: Idle if no target is setted
         if (target == null) return States.IDLE;
 
-        Bounds detectionBounds = new Bounds(transform.position, Vector3.one * detectionRange);
-        if (!detectionBounds.Contains(target.transform.position)) return States.IDLE;
-
-        bool inAttackRange = Vector3.Distance(target.transform.position, transform.position) <= attackRadius;
-        if (inAttackRange)
+        bool isGrounded = Physics.Linecast(transform.position, floorSensor.transform.position);
+        if (isGrounded)
         {
-            if(Time.time <= nextAttackTime)
+            //If the player isn't near, means that we dont need to do anything.
+            //But we return idle, for animation stuff
+            Bounds detectionBounds = new Bounds(transform.position, Vector3.one * detectionRange);
+            if (!detectionBounds.Contains(target.transform.position) && isGrounded) return States.IDLE;
+
+            //If the player is inside the attack range and isn't idle
+            // proceed with the attack or load actions
+            bool inAttackRange = Vector3.Distance(target.transform.position, transform.position) <= attackRadius;
+            if (inAttackRange)
             {
-                return States.WAITING;
+                //If the time is smaller than the next action time, means that some action needs to be waited
+                //Also, it needs to be on the ground
+                if (Time.time <= nextActionTime && isGrounded)
+                {
+                    return States.WAITING;
+                }
+                //If the AI has loaded, and is on the ground, then the attack is valid
+                if (canAttack && isGrounded)
+                {
+                    nextActionTime = Time.time + attackCooldown;
+                    canAttack = false;
+                    return States.ATTACK;
+                }
+                //If the AI can't attack but is on the floor, it needs to load
+                else if (isGrounded)
+                {
+                    nextActionTime = Time.time + attackDelay;
+                    canAttack = true;
+                    return States.LOAD;
+                }
             }
-
-            lastAttackTime = Time.time;
-            nextAttackTime = lastAttackTime + attackCooldown;
-            return States.ATTACK;
-        }
-
-        return States.MOVING;
+            //If isn't on attack range, but is inside the detection range, it needs to move.
+            else
+            {
+                return States.MOVING;
+            }
+        }    
+        //if isn't on the ground, is falling, so no action should be done until it is on the ground
+        return States.FALLING;
     }
 
+    #region Debug
     private void OnDrawGizmos()
     {
         if (!showGizmos) return;
@@ -83,4 +116,5 @@ public class EnemyBrain : MonoBehaviour
         Debug.DrawLine(p3, p7, Color.green, delay);
         Debug.DrawLine(p4, p8, Color.cyan, delay);
     }
+    #endregion
 }
