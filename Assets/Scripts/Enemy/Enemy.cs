@@ -85,15 +85,10 @@ public class Enemy : MonoBehaviour
                 Ray ray = new Ray(transform.position, new Vector3(0, -75, 0));
                 Debug.DrawRay(transform.position, new Vector3(0, -75, 0), Color.blue, 6f);
                 Physics.Raycast(ray, out hit);
-                if (Mathf.Abs(Vector3.Distance(transform.position, hit.point)) < 1f)
+                if (Mathf.Abs(Vector3.Distance(transform.position, hit.point)) < 2f)
                 {
                     Debug.Log("Chao está perto, resetando");
                     agent.enabled = true;
-                }
-                else if(Mathf.Abs(Vector3.Distance(transform.position, hit.transform.position)) > 50)
-                {
-                    //se saiu voando pra longe
-                    Destroy(this.gameObject);
                 }
                 timeFalling = 0;
             }
