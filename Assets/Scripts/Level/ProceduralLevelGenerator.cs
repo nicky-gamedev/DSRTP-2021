@@ -68,12 +68,10 @@ public class ProceduralLevelGenerator : MonoBehaviour
             }
         }
         Debug.Log("Instantiating final floor...");
-        GameObject _end_floor = Instantiate(floor, transform);
+        GameObject _end = Instantiate(end, transform);
         var _collider = floor.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds.max;
-        _end_floor.transform.position = new Vector3(transform.position.x + _collider.x * numberOfIterations * 2, transform.position.y, transform.position.z);
+        _end.transform.position = new Vector3(transform.position.x + _collider.x * numberOfIterations * 2, transform.position.y, transform.position.z);
         Debug.Log("Finished Level generation : " + Time.realtimeSinceStartup.ToString());
-
-        GameObject end_level = Instantiate(end, _end_floor.transform);
 
         GameManager gm = GameManager.instance;
         gm.timeRemaining = gm.fullTime;
