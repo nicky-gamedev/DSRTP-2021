@@ -28,18 +28,19 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         //Getting total minutes in int, to compare
-        minutesTotal = Mathf.RoundToInt(GameManager.instance.timeRemaining / 60);
+        minutesTotal = Mathf.RoundToInt(GameManager.instance.fullTime / 60);
     }
 
     void Update()
     {
         //getting the actual minutes
-        int minutesRemaining = Mathf.RoundToInt(GameManager.instance.timeRemaining / 60);
+        int minutesRemaining = (GameManager.instance.ActualTime / 60);
 
         //if the list is smaller than the minutes passed times the enemies per minute
         if(maxEnemiesSpawnedPerMinute * (minutesTotal - minutesRemaining) >= enemiesSpawned.Count)
         {
             //Spawn more pls :)
+            Debug.Log("Enemies spawned per minute are less than enemies spawned");
             SpawnFromGeneratorAndAdd(maxEnemiesSpawnedPerMinute * (minutesTotal - minutesRemaining));
         }
 

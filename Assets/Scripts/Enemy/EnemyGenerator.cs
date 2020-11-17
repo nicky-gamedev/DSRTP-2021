@@ -13,6 +13,7 @@ public class EnemyGenerator : MonoBehaviour
     private void Awake()
     {
         areaOfSpawning = GetComponent<Collider>().bounds;
+        GetComponent<Collider>().enabled = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -23,6 +24,7 @@ public class EnemyGenerator : MonoBehaviour
 
     public GameObject SpawnEnemy()
     {
+        Debug.Log("Spawning enemy");
         Vector3 spawnPosition = new Vector3(
         Random.Range(areaOfSpawning.min.x, areaOfSpawning.max.x),
         transform.position.y,
