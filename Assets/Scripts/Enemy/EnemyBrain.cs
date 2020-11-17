@@ -24,6 +24,7 @@ public class EnemyBrain : MonoBehaviour
 
     float nextActionTime;
     bool canAttack;
+    bool isWaiting;
     
     public States UpdateBrain(Enemy enemy)
     {
@@ -47,6 +48,7 @@ public class EnemyBrain : MonoBehaviour
                 //Also, it needs to be on the ground
                 if (Time.time <= nextActionTime && isGrounded)
                 {
+                    isWaiting = false;
                     return States.WAITING;
                 }
                 //If the AI has loaded, and is on the ground, then the attack is valid
@@ -54,6 +56,7 @@ public class EnemyBrain : MonoBehaviour
                 {
                     nextActionTime = Time.time + attackCooldown;
                     canAttack = false;
+                    isWaiting = true;
                     return States.ATTACK;
                 }
                 //If the AI can't attack but is on the floor, it needs to load
@@ -61,6 +64,7 @@ public class EnemyBrain : MonoBehaviour
                 {
                     nextActionTime = Time.time + attackDelay;
                     canAttack = true;
+                    isWaiting = true;
                     return States.LOAD;
                 }
             }
@@ -69,8 +73,15 @@ public class EnemyBrain : MonoBehaviour
             {
                 return States.MOVING;
             }
-        }    
-        //if isn't on the ground, is falling, so no action should be done until it is on the ground
+        }
+        
+        if (isWaiting)
+        {
+            Debug.LogWarning("This was waiting but now it isn't on the ground. Should correct it's position?");
+        }
+
+        //if isn't on the ground, and wasn't waiting before, is falling
+        //so no action should be done until it is on the ground
         return States.FALLING;
     }
 
@@ -78,12 +89,14 @@ public class EnemyBrain : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (!showGizmos) return;
-        Gizmos.color = new Color(255f, 0f, 0f, 0.5f);
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
 
-        Gizmos.color = new Color(0f, 255f, 0f, 0.5f);
         Bounds debugBounds = new Bounds(transform.position, Vector3.one * detectionRange);
         DrawBounds(debugBounds);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, floorSensor.transform.position);
     }
 
     void DrawBounds(Bounds b, float delay = 0)

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     [SerializeField] public NavMeshAgent agent;
     [SerializeField] Rigidbody rb;
+    [SerializeField] Renderer rend;
 
     [Header("Parameters")]
     [SerializeField] float attackJumpForce = 20f;
@@ -22,33 +23,48 @@ public class Enemy : MonoBehaviour
         brain.target = GameObject.FindGameObjectWithTag("Player");
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!rb) rb = GetComponent<Rigidbody>();
+        if (!rend) rend = GetComponent<Renderer>();
     }
 
     void Update()
     {
+        Debug.Log("Enemy State is " + enemyState);
         enemyState = brain.UpdateBrain(this);
-        if(enemyState == EnemyBrain.States.IDLE)
+        if (enemyState == EnemyBrain.States.IDLE)
         {
             rb.velocity = Vector3.zero;
+            transform.rotation = Quaternion.identity;
+            rend.material.color = Color.white;
         }
-        if(enemyState == EnemyBrain.States.MOVING)
+        if (enemyState == EnemyBrain.States.MOVING)
         {
+            agent.enabled = true;
             MoveToPlayer();
+            rend.material.color = Color.cyan;
         }
         if (enemyState == EnemyBrain.States.ATTACK)
         {
             Attack();
+            rend.material.color = Color.red;
         }
-        if(enemyState == EnemyBrain.States.LOAD)
+        if (enemyState == EnemyBrain.States.LOAD)
         {
             transform.LookAt(brain.target.transform);
+            rend.material.color = Color.yellow;
             Load();
         }
-        if(enemyState == EnemyBrain.States.WAITING)
+        if (enemyState == EnemyBrain.States.WAITING)
         {
-            transform.LookAt(brain.target.transform);
+            rb.angularVelocity = Vector3.zero;
+            var lookPos = brain.target.transform.position - transform.position;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
+            rend.material.color = Color.blue;
         }
-        Debug.Log("Enemy is: " + enemyState);
+        if (enemyState == EnemyBrain.States.FALLING)
+        {
+            rend.material.color = Color.green;
+        }
     }
 
     void MoveToPlayer()

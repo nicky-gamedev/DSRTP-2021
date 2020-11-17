@@ -13,7 +13,7 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
 
     [SerializeField] Vector3 moveDirection;
     [SerializeField] Vector3 verticalDirection;
-    CharacterController controller;
+    public CharacterController controller;
 
     void Awake()
     {
