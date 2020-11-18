@@ -161,6 +161,9 @@ MonoBehaviour:
   gravity: -17
   moveDirection: {x: 0, y: 0, z: 0}
   verticalDirection: {x: 0, y: 0, z: 0}
+  controller: {fileID: 0}
+  timeSinceLastHit: 0
+  invulnerabilityTime: 1
 --- !u!143 &131072479
 CharacterController:
   m_ObjectHideFlags: 0

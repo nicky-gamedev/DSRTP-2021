@@ -517,6 +517,9 @@ MonoBehaviour:
   gravity: -17
   moveDirection: {x: 0, y: 0, z: 0}
   verticalDirection: {x: 0, y: 0, z: 0}
+  controller: {fileID: 0}
+  timeSinceLastHit: 0
+  invulnerabilityTime: 1
 --- !u!143 &1041507885
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1124,7 +1127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044737138}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.36, y: 0, z: 0}
+  m_LocalPosition: {x: 17.97, y: 0, z: 0}
   m_LocalScale: {x: 37.07032, y: 3.3047998, z: 12.079395}
   m_Children: []
   m_Father: {fileID: 0}
