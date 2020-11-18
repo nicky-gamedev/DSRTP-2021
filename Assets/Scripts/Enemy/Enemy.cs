@@ -121,13 +121,13 @@ public class Enemy : MonoBehaviour
         transform.LookAt(new Vector3(0, brain.target.transform.position.y, 0));
     }
 
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        /*
-        if (!agent.enabled && collision.collider.gameObject.layer == 8 && enemyState != EnemyBrain.States.ATTACK)
-        {
-            agent.enabled = true;
-        }
-        */
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -83,9 +84,51 @@ public class GameManager : MonoBehaviour
     public void Strike()
     {
         timeRemaining -= 60f;
-        if (timeRemaining <= 0)
+    }
+
+    public void Hit()
+    {
+        timeRemaining -= 15f;
+        StartCoroutine(PlayerHit());
+    }
+
+    IEnumerator PlayerHit()
+    {
+        int i = 4;
+        for (i = 4; i > 0; i--)
         {
-            SceneManager.LoadScene(0);
+            if (timeTree.activeLeafs[i])
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    timeTree.leafs[j].material.color = Color.blue;
+                }
+                break;
+            }
         }
+        yield return new WaitForSeconds(1);
+        for (int j = 0; j < i; j++)
+        {
+            timeTree.leafs[j].material.color = Color.white;
+        }
+
+        /*
+         *----------    Faz apenas a folha "atual" "balançar"   ----------
+         *  
+         * int i = 4;
+        for (i = 4; i > 0; i--)
+        {
+            if (timeTree.activeLeafs[i])
+            {
+                timeTree.leafs[i].material.color = Color.blue;
+                break;
+            }
+        }
+        yield return new WaitForSeconds(1);
+        if (timeTree.activeLeafs[i])
+        {
+            timeTree.leafs[i].material.color = Color.white;
+        }
+         */
     }
 }

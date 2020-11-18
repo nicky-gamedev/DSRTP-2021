@@ -15,6 +15,9 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
     [SerializeField] Vector3 verticalDirection;
     public CharacterController controller;
 
+    [SerializeField] float timeSinceLastHit;
+    public float invulnerabilityTime = 1;
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -52,12 +55,34 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
         controller.Move(moveDirection * speed * Time.deltaTime);
 
         controller.Move(verticalDirection * Time.deltaTime);
+
+        timeSinceLastHit -= Time.deltaTime;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.transform.gameObject == actualFloor) return;
+        if (hit.gameObject.CompareTag("Floor") && hit.transform != actualFloor)
+        {
+            Debug.Log("Hit floor");
+            actualFloor = hit.gameObject.transform;
+        }
+        else if (hit.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Hit enemy");
+            if (hit.point.y < (transform.position.y - .85f) && hit.moveDirection.y < -.5f)
+            {
+                hit.gameObject.GetComponent<Enemy>().Kill();
+            }
+        }
+    }
 
-        actualFloor = hit.gameObject.transform;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy") && timeSinceLastHit <= 0)
+        {
+            Debug.Log("Enemy hit player");
+            timeSinceLastHit = invulnerabilityTime;
+            GameManager.instance.Hit();
+        }
     }
 }

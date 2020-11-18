@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ControlledObject
+  - Enemy
+  - Floor
   layers:
   - Default
   - TransparentFX
