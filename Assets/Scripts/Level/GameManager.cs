@@ -94,6 +94,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerHit()
     {
+        /*
+         * ----------    Faz todas as folhas "balançar"   ----------
+         * 
         int i = 4;
         for (i = 4; i > 0; i--)
         {
@@ -111,11 +114,13 @@ public class GameManager : MonoBehaviour
         {
             timeTree.leafs[j].material.color = Color.white;
         }
+        */
 
         /*
          *----------    Faz apenas a folha "atual" "balançar"   ----------
-         *  
-         * int i = 4;
+         */
+        
+        int i = 4;
         for (i = 4; i > 0; i--)
         {
             if (timeTree.activeLeafs[i])
@@ -129,6 +134,5 @@ public class GameManager : MonoBehaviour
         {
             timeTree.leafs[i].material.color = Color.white;
         }
-         */
     }
 }
