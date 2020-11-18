@@ -54,8 +54,8 @@ MonoBehaviour:
   - 0.5
   - 1
   - 2
-  button: {fileID: 0}
-  door: {fileID: 0}
+  button: {fileID: 8254012424327741915}
+  door: {fileID: 5601277378992676145}
 --- !u!1 &8254012422460244766
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 8254012424327741914}
   - component: {fileID: 8254012424327741915}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ButtonClick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -713,6 +713,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78d20f46b2054545aa8dca60e6336ee, type: 3}
+--- !u!1 &5601277378992676145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4555277259503930109, guid: b78d20f46b2054545aa8dca60e6336ee, type: 3}
+  m_PrefabInstance: {fileID: 8254012423148640204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5601277378992676144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4555277259503930108, guid: b78d20f46b2054545aa8dca60e6336ee, type: 3}
