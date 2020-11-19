@@ -15,12 +15,17 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
     [SerializeField] Vector3 verticalDirection;
     public CharacterController controller;
 
+    public Animator anim;
+
     [SerializeField] float timeSinceLastHit;
-    public float invulnerabilityTime = 1;
+    public float invulnerabilityTime = 4;
+
+    public bool stunned;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        stunned = false;
     }
 
     // Update is called once per frame
@@ -30,6 +35,9 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         moveDirection = Vector3.right * x + Vector3.forward * z;
+
+        //Apply stun
+        if (stunned) moveDirection = Vector3.zero;
 
         if (!moveDirection.Equals(Vector3.zero))
         {
@@ -46,9 +54,25 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
         {
             verticalDirection.y = -2f;
 
+            //Animation Fall
+            anim.SetTrigger("HitGround");
+
             if (Input.GetButton("Jump"))
             {
+                //Reset animation Fall
+                anim.ResetTrigger("HitGround");
+                //anim.SetTrigger("Jump");
+                //Play animation Jump (this way it doesnt have any time between Run and Idle)
+                anim.Play("Jump");
                 verticalDirection.y = Mathf.Sqrt(impulseJump * -2 * gravity);
+            }
+            if (verticalDirection.y == -2f)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    //Play animation Sopro (this way it doesnt have any time between Run and Idle)
+                    anim.Play("Sopro");
+                }
             }
         }
 
@@ -56,7 +80,12 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
 
         controller.Move(verticalDirection * Time.deltaTime);
 
+        //Set animation Run conditions
+        if (moveDirection.x != 0 || moveDirection.z != 0) anim.SetBool("Running", true);
+        else anim.SetBool("Running", false);
+
         timeSinceLastHit -= Time.deltaTime;
+        if (timeSinceLastHit <= 3) stunned = false;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -83,6 +112,9 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
             Debug.Log("Enemy hit player");
             timeSinceLastHit = invulnerabilityTime;
             GameManager.instance.Hit();
+            stunned = true;
+
+            anim.SetTrigger("Damage");
         }
     }
 }
