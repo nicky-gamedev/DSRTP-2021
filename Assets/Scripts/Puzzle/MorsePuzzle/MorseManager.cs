@@ -17,9 +17,19 @@ public class MorseManager : MonoBehaviour
 
     private void SetupLights()
     {
+        bool has2 = false;
         foreach (LightBlink light in lights)
         {
-            light.interval = possibleIntevals[Random.Range(0, possibleIntevals.Count)];
+            if (has2) 
+            { 
+                light.interval = possibleIntevals[Random.Range(0, possibleIntevals.Count - 1)]; 
+            }
+            else 
+            { 
+                light.interval = possibleIntevals[Random.Range(0, possibleIntevals.Count)];
+                if (light.interval == possibleIntevals[2]) has2 = true;
+            }
+
             light.Setup();
         }
     }
@@ -54,7 +64,7 @@ public class MorseManager : MonoBehaviour
                     clicksNeeded++;
                     break;
                 case '2':
-                    clicksNeeded = 3;
+                    clicksNeeded *= 2;
                     break;
                 default:
                     Debug.Log("Switch cant compare char");

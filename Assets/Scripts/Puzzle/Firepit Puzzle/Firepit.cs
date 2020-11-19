@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Firepit : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class Firepit : MonoBehaviour
     private FirePitPuzzleManager manager;
     public bool listening;
 
+    //public VisualEffect fire;
+
     private void Update()
     {
         if (listening)
@@ -44,27 +47,35 @@ public class Firepit : MonoBehaviour
         {
             case 0:
                 mt.color = Color.red;
+                //fire.SetVector4("Color", new Vector4(255, 0, 0, 0));
                 break;
             case 1:
                 mt.color = Color.white;
+                //fire.SetVector4("Color", new Vector4(255, 255, 255, 0));
                 break;
             case 2:
                 mt.color = Color.blue;
+                //fire.SetVector4("Color", new Vector4(0, 0, 255, 0));
                 break;
             case 3:
                 mt.color = Color.yellow;
+                //fire.SetVector4("Color", new Vector4(255, 255, 0, 0));
                 break;
             case 4:
                 mt.color = Color.black;
+                //fire.SetVector4("Color", new Vector4(0, 0, 0, 0));
                 break;
             case 5:
                 mt.color = Color.magenta;
+                //fire.SetVector4("Color", new Vector4(255, 0, 255, 0));
                 break;
             case 6:
                 mt.color = Color.green;
+                //fire.SetVector4("Color", new Vector4(0, 255, 0, 0));
                 break;
             default:
                 mt.color = Color.grey;
+                //fire.SetVector4("Color", new Vector4(100, 100, 100, 0));
                 break;
         }
         listening = false;
