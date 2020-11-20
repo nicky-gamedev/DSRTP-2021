@@ -28,6 +28,7 @@ public class Firepit : MonoBehaviour
     public bool listening;
 
     //public VisualEffect fire;
+    public ParticleSystem interact;
 
     private void Update()
     {
@@ -36,45 +37,57 @@ public class Firepit : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 manager.Interact(position);
+                interact.Play();
             }
         }
     }
 
     public void Setup()
     {
+        interact.playOnAwake = false;
+        interact.Stop();
         Material mt = GetComponentInChildren<MeshRenderer>().material;
+        Light l = GetComponentInChildren<Light>();
         switch (colorCode)
         {
             case 0:
                 mt.color = Color.red;
+                l.color = Color.red;
                 //fire.SetVector4("Color", new Vector4(255, 0, 0, 0));
                 break;
             case 1:
                 mt.color = Color.white;
+                l.color = Color.white;
                 //fire.SetVector4("Color", new Vector4(255, 255, 255, 0));
                 break;
             case 2:
                 mt.color = Color.blue;
+                l.color = Color.blue;
                 //fire.SetVector4("Color", new Vector4(0, 0, 255, 0));
                 break;
             case 3:
                 mt.color = Color.yellow;
+                l.color = Color.yellow;
                 //fire.SetVector4("Color", new Vector4(255, 255, 0, 0));
                 break;
             case 4:
                 mt.color = Color.black;
+                l.color = Color.black;
                 //fire.SetVector4("Color", new Vector4(0, 0, 0, 0));
                 break;
             case 5:
                 mt.color = Color.magenta;
+                l.color = Color.magenta;
                 //fire.SetVector4("Color", new Vector4(255, 0, 255, 0));
                 break;
             case 6:
                 mt.color = Color.green;
+                l.color = Color.green;
                 //fire.SetVector4("Color", new Vector4(0, 255, 0, 0));
                 break;
             default:
                 mt.color = Color.grey;
+                l.color = Color.grey;
                 //fire.SetVector4("Color", new Vector4(100, 100, 100, 0));
                 break;
         }

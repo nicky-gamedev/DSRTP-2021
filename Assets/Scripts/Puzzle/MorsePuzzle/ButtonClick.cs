@@ -11,12 +11,15 @@ public class ButtonClick : MonoBehaviour
 
     public MeshRenderer buttonMaterial;
 
+    public ParticleSystem interaction;
+
     void Update()
     {
         if (listening)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                interaction.Play();
                 clicks++;
             }
         }
@@ -33,6 +36,7 @@ public class ButtonClick : MonoBehaviour
     {
         GetComponent<Collider>().enabled = false;
         enabled = false;
+        interaction.Stop();
     }
 
     IEnumerator ListeningTime()

@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float timeFalling = 0;
     public float timeFallingLimit = 5;
 
+    public ParticleSystem deathParticle;
+
     private void Awake()
     {
         brain = GetComponent<EnemyBrain>();
@@ -30,6 +32,8 @@ public class Enemy : MonoBehaviour
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!rb) rb = GetComponent<Rigidbody>();
         //if (!rend) rend = GetComponent<Renderer>();
+        deathParticle = GetComponentInChildren<ParticleSystem>();
+        deathParticle.playOnAwake = false;
     }
 
     void Update()
@@ -136,6 +140,7 @@ public class Enemy : MonoBehaviour
     public void Kill()
     {
         anim.Play("Squash");
+        deathParticle.Play();
         GetComponent<Collider>().enabled = false;
         Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length);
     }

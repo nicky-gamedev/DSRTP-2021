@@ -17,6 +17,7 @@ public class ControlPuzzleManager : MonoBehaviour
         {
             delivery.gameObject.GetComponent<DeliveryPlace>().enabled = false;
             delivery.GetComponent<BoxCollider>().enabled = false;
+            delivery.GetComponentInChildren<ParticleSystem>().Play();
         }
         door.gameObject.SetActive(false);
     }

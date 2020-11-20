@@ -11,6 +11,14 @@ public class ControlButton : MonoBehaviour
     public float buttonControlForce;
 
     public Rigidbody controlledObjectRigidbody;
+
+    private void OnEnable()
+    {
+        ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
+        ps.playOnAwake = false;
+        ps.Stop();
+    }
+
     void Update()
     {
         if (playerInside)

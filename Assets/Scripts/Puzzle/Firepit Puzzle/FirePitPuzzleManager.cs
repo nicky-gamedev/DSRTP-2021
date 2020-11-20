@@ -108,6 +108,7 @@ public class FirePitPuzzleManager : MonoBehaviour
         {
             fp.listening = false;
             fp.enabled = false;
+            fp.interact.Stop();
         }
     }
 

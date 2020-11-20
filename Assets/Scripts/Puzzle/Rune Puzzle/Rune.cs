@@ -10,6 +10,8 @@ public class Rune : MonoBehaviour
     public bool selected;
     bool listening;
 
+    public ParticleSystem interaction;
+
     private void Awake()
     {
         rune = transform.parent.gameObject.GetComponent<RuneManager>();
@@ -21,6 +23,7 @@ public class Rune : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                interaction.Play();
                 selected = true;
                 rune.CheckOrder(this);
             }
@@ -29,6 +32,8 @@ public class Rune : MonoBehaviour
 
     public void Steup()
     {
+        interaction.playOnAwake = false;
+        interaction.Stop();
         GameObject go = Instantiate(runePrefab, transform);
         go.transform.position += Vector3.up * 2;
         go.transform.localScale = new Vector3(.3f, .3f, .3f);

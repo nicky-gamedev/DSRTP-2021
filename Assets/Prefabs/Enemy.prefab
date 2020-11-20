@@ -1357,6 +1357,7 @@ MonoBehaviour:
   anim: {fileID: 4338381525183382783}
   timeFalling: 0
   timeFallingLimit: 5
+  deathParticle: {fileID: 0}
 --- !u!114 &5778467074972299178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1870,6 +1871,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5778467074972299180}
     m_Modifications:
+    - target: {fileID: 3302442363463960437, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3302442363463960438, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1880,15 +1885,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3302442364004722508, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.9941964
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3302442364004722508, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.112009
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3302442364004722508, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75928485
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3302442364004722508, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1930,6 +1935,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3302442364004722509, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3302442364004722510, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1938,9 +1947,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Kill
       objectReference: {fileID: 0}
+    - target: {fileID: 3302442364771652865, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3302442364771652866, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302442364988706139, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3302442364988706140, guid: 10434d6bf3af98b46a88ab696f543ee3, type: 3}
       propertyPath: m_Materials.Array.size

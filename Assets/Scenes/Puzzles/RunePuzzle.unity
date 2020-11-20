@@ -950,18 +950,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3835000698450756569, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 963194227}
-    - target: {fileID: 3835000698580688290, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 963194227}
-    - target: {fileID: 3835000699290241906, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 963194227}
     - target: {fileID: 3835000699997493787, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
       propertyPath: m_Name
       value: Rune
@@ -1010,9 +998,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3835000700454325299, guid: 970b2e8755ac0794597d088583b64d17, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 963194227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 970b2e8755ac0794597d088583b64d17, type: 3}

@@ -15,6 +15,7 @@ public class DeliveryPlace : MonoBehaviour
             if (controlled.objectType == deliveryPlaceLocal)
             {
                 manager.Completed();
+                controlled.GetComponentInChildren<ParticleSystem>().Play();
             }
             else
             {
