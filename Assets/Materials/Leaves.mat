@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _CutoffHeight: 8.56
+    - _CutoffHeight: 3.4707818
     - _EdgeWidth: 0.05
     - _NoiseScale: 44.65
     - _NoiseStrength: 1
