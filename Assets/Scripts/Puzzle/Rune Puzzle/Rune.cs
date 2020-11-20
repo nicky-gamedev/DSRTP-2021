@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Rune : MonoBehaviour
 {
     public RuneManager rune;
 
     public char text;
+    public GameObject runePrefab;
     public int order;
     public bool selected;
-    [SerializeField] Text UItext;
     bool listening;
 
     private void Awake()
@@ -20,8 +17,6 @@ public class Rune : MonoBehaviour
 
     void Update()
     {
-        UItext.text = text.ToString();
-
         if (listening)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -30,6 +25,13 @@ public class Rune : MonoBehaviour
                 rune.CheckOrder(this);
             }
         }
+    }
+
+    public void Steup()
+    {
+        GameObject go = Instantiate(runePrefab, transform);
+        go.transform.position += Vector3.up * 2;
+        go.transform.localScale = new Vector3(.3f, .3f, .3f);
     }
 
     private void OnTriggerEnter(Collider other)

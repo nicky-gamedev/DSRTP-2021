@@ -12,11 +12,21 @@ public class RuneManager : MonoBehaviour
         public List<char> runes;
     }
     public List<RuneGroup> allRunes;
+
+    [System.Serializable]
+    public class RunePrefabs
+    {
+        public List<GameObject> runes;
+    }
+    public List<RunePrefabs> allPrefabs;
     #endregion
 
     [SerializeField] List<char> pickedRuneGroup;
+    [SerializeField] List<GameObject> pickedRunePrefabs;
     [SerializeField] List<Rune> gameRunes;
     [SerializeField] List<int> orderList;
+
+    public Dictionary<char, GameObject> runePrefabs = new Dictionary<char, GameObject>();
 
     public bool won;
     public int position;
@@ -24,7 +34,10 @@ public class RuneManager : MonoBehaviour
 
     void OnEnable()
     {
-        pickedRuneGroup = allRunes[Random.Range(0, allRunes.Count)].runes;
+        int rand = Random.Range(0, allRunes.Count);
+        pickedRuneGroup = allRunes[rand].runes;
+        pickedRunePrefabs = allPrefabs[rand].runes;
+
         gameRunes = GetComponentsInChildren<Rune>().ToList();
         var rnd = new System.Random();
         gameRunes = gameRunes.OrderBy(item => rnd.Next()).ToList();
@@ -37,10 +50,13 @@ public class RuneManager : MonoBehaviour
             {
                 randomRange = Random.Range(0, pickedRuneGroup.Count);
                 item.text = pickedRuneGroup[randomRange];
+                item.runePrefab = pickedRunePrefabs[randomRange];
             } while (characterList.Contains(item.text));
 
             characterList.Add(item.text);
             orderList.Add(randomRange);
+
+            item.Steup();
         }
 
         orderList = Sort(orderList);
