@@ -2,20 +2,11 @@
 
 public class TimeTree : MonoBehaviour
 {
-    public MeshRenderer[] leafs = new MeshRenderer[5];
-    public bool[] activeLeafs = new bool[5];
+    public Material leafs;
+    public Transform top, bot;
 
-    private void Start()
+    public void RemoveLeaf(float percentage)
     {
-        for (int i = 0; i < activeLeafs.Length; i++)
-        {
-            activeLeafs[i] = true;
-        }
-    }
-
-    public void RemoveLeaf(int leaf)
-    {
-        leafs[leaf].material.color = Color.red;
-        activeLeafs[leaf] = false;
+        leafs.SetFloat("_CutoffHeight", Mathf.Lerp(bot.position.y, top.position.y, percentage));
     }
 }
