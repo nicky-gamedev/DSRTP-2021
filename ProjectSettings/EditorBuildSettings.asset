@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProceduralLevel.unity
     guid: 9ee5aae36abdc41419cd85e39dc8dbd6
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: 2b4beaa1160021845893e1cefc723685
   m_configObjects: {}
