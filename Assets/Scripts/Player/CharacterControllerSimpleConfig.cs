@@ -22,6 +22,8 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
 
     public bool stunned;
 
+    public AudioSource[] sources = new AudioSource[4];
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -49,6 +51,9 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
         if (!controller.isGrounded)
         {
             verticalDirection.y += gravity * Time.deltaTime;
+
+            StopSource(sources[0]);
+
         }
         else
         {
@@ -56,6 +61,9 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
 
             //Animation Fall
             anim.SetTrigger("HitGround");
+
+            if (moveDirection.x != 0 || moveDirection.z != 0) StartSource(sources[0]);
+            else StopSource(sources[0]);
 
             if (Input.GetButton("Jump"))
             {
@@ -65,6 +73,8 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
                 //Play animation Jump (this way it doesnt have any time between Run and Idle)
                 anim.Play("Jump");
                 verticalDirection.y = Mathf.Sqrt(impulseJump * -2 * gravity);
+
+                StopSource(sources[0]);
             }
             if (verticalDirection.y == -2f)
             {
@@ -72,6 +82,7 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
                 {
                     //Play animation Sopro (this way it doesnt have any time between Run and Idle)
                     anim.Play("Sopro");
+                    sources[1].Play();
                 }
             }
         }
@@ -100,6 +111,7 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
             Debug.Log("Hit enemy");
             if (hit.point.y < (transform.position.y - .85f) && hit.moveDirection.y < -.5f)
             {
+                StartSource(sources[2]);
                 hit.gameObject.GetComponent<Enemy>().Kill();
             }
         }
@@ -114,7 +126,25 @@ public class CharacterControllerSimpleConfig : MonoBehaviour
             GameManager.instance.Hit();
             stunned = true;
 
+            StartSource(sources[3]);
+
             anim.SetTrigger("Damage");
+        }
+    }
+
+    private void StopSource(AudioSource ad)
+    {
+        if (ad.isPlaying)
+        {
+            ad.Stop();
+        }
+    }
+
+    private void StartSource(AudioSource ad)
+    {
+        if (!ad.isPlaying)
+        {
+            ad.Play();
         }
     }
 }

@@ -31,6 +31,7 @@ public class RuneManager : MonoBehaviour
     public bool won;
     public int position;
     public GameObject door;
+    private AudioSource ad => GetComponent<AudioSource>();
 
     void OnEnable()
     {
@@ -81,6 +82,7 @@ public class RuneManager : MonoBehaviour
         {
             won = true;
             door.SetActive(false);
+            ad.Play();
         }
     }
 

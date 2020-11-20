@@ -18,6 +18,7 @@ public class FirePitPuzzleManager : MonoBehaviour
     private Firepit[] firepits = new Firepit[6];
     [SerializeField]
     private GameObject door;
+    private AudioSource ad => GetComponent<AudioSource>();
 
 
     private void OnEnable()
@@ -110,6 +111,7 @@ public class FirePitPuzzleManager : MonoBehaviour
             fp.enabled = false;
             fp.interact.Stop();
         }
+        ad.Play();
     }
 
     private void SetupFires(Firepit[] fps)

@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem deathParticle;
 
+    public AudioSource[] sources = new AudioSource[4];
+
     private void Awake()
     {
         brain = GetComponent<EnemyBrain>();
@@ -46,6 +48,12 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.identity;
             //rend.material.color = Color.white;
 
+            StopSource(sources[1]);
+            StopSource(sources[2]);
+            StopSource(sources[3]);
+
+            StartSource(sources[0]);
+
             timeFalling = 0;
         }
         if (enemyState == EnemyBrain.States.MOVING)
@@ -53,6 +61,12 @@ public class Enemy : MonoBehaviour
             agent.enabled = true;
             MoveToPlayer();
             //rend.material.color = Color.cyan;
+
+            StopSource(sources[0]);
+            StopSource(sources[1]);
+            StopSource(sources[3]);
+
+            StartSource(sources[2]);
 
             timeFalling = 0;
         }
@@ -62,6 +76,12 @@ public class Enemy : MonoBehaviour
             //rend.material.color = Color.red;
 
             anim.Play("Attack");
+
+            StopSource(sources[0]);
+            StopSource(sources[2]);
+            StopSource(sources[3]);
+
+            StartSource(sources[1]);
 
             timeFalling = 0;
         }
@@ -148,5 +168,21 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
+    }
+
+    private void StopSource(AudioSource ad)
+    {
+        if (ad.isPlaying)
+        {
+            ad.Stop();
+        }
+    }
+
+    private void StartSource(AudioSource ad)
+    {
+        if (!ad.isPlaying)
+        {
+            ad.Play();
+        }
     }
 }

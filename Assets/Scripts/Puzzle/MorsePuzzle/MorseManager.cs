@@ -9,6 +9,7 @@ public class MorseManager : MonoBehaviour
 
     public ButtonClick button;
     public GameObject door;
+    private AudioSource ad => GetComponent<AudioSource>();
 
     private void OnEnable()
     {
@@ -81,6 +82,7 @@ public class MorseManager : MonoBehaviour
             Debug.Log("Right answer");
             button.TurnOff();
             door.SetActive(false);
+            ad.Play();
         }
         else
         {
