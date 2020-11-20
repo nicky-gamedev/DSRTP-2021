@@ -11,14 +11,17 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     [SerializeField] public NavMeshAgent agent;
     [SerializeField] Rigidbody rb;
-    [SerializeField] Renderer rend;
+    //[SerializeField] Renderer rend;
 
     [Header("Parameters")]
     [SerializeField] float attackJumpForce = 20f;
     [SerializeField] float attackAngle = -30f;
 
+    public Animator anim;
+
     [Header("Test")]
     [SerializeField] float timeFalling = 0;
+    public float timeFallingLimit = 5;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class Enemy : MonoBehaviour
         brain.target = GameObject.FindGameObjectWithTag("Player");
         if (!agent) agent = GetComponent<NavMeshAgent>();
         if (!rb) rb = GetComponent<Rigidbody>();
-        if (!rend) rend = GetComponent<Renderer>();
+        //if (!rend) rend = GetComponent<Renderer>();
     }
 
     void Update()
@@ -37,7 +40,7 @@ public class Enemy : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             transform.rotation = Quaternion.identity;
-            rend.material.color = Color.white;
+            //rend.material.color = Color.white;
 
             timeFalling = 0;
         }
@@ -45,21 +48,23 @@ public class Enemy : MonoBehaviour
         {
             agent.enabled = true;
             MoveToPlayer();
-            rend.material.color = Color.cyan;
+            //rend.material.color = Color.cyan;
 
             timeFalling = 0;
         }
         if (enemyState == EnemyBrain.States.ATTACK)
         {
             Attack();
-            rend.material.color = Color.red;
+            //rend.material.color = Color.red;
+
+            anim.Play("Attack");
 
             timeFalling = 0;
         }
         if (enemyState == EnemyBrain.States.LOAD)
         {
             //transform.LookAt(brain.target.transform);
-            rend.material.color = Color.yellow;
+            //rend.material.color = Color.yellow;
             Load();
 
             timeFalling = 0;
@@ -70,15 +75,16 @@ public class Enemy : MonoBehaviour
             Vector3 lookPos = new Vector3(brain.target.transform.position.x - transform.position.x, 0, brain.target.transform.position.z - transform.position.z);
             var rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
-            rend.material.color = Color.blue;
+            //rend.material.color = Color.blue;
 
             timeFalling = 0;
         }
         if (enemyState == EnemyBrain.States.FALLING)
         {
-            rend.material.color = Color.green;
+
+            //rend.material.color = Color.green;
             timeFalling += Time.deltaTime;
-            if (timeFalling >= 7.5f)
+            if (timeFalling >= timeFallingLimit)
             {
                 Debug.Log("Caindo a muito tempo");
                 RaycastHit hit;
@@ -101,10 +107,14 @@ public class Enemy : MonoBehaviour
         if (!agent.isOnNavMesh) return;
         if (agent.isStopped) agent.isStopped = false;
         agent.SetDestination(brain.target.transform.position);
+
+        anim.SetBool("Running", true);
     }
 
     void Attack()
-    {        
+    {
+        anim.SetBool("Running", false);
+
         rb.isKinematic = false;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         rb.AddForceAtPosition((transform.forward + new Vector3(0,.2f,0)) * attackJumpForce, transform.position, ForceMode.Impulse);
@@ -112,6 +122,8 @@ public class Enemy : MonoBehaviour
 
     void Load()
     {
+        anim.SetBool("Running", false);
+
         rb.velocity = Vector3.zero;
         if (agent.hasPath)
         {
@@ -123,7 +135,9 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
-        Destroy(gameObject);
+        anim.Play("Squash");
+        GetComponent<Collider>().enabled = false;
+        Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length);
     }
 
     private void OnCollisionEnter(Collision collision)
