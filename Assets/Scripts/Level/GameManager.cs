@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
                 timeTree.RemoveLeaf(0);
             }
         }
+
         if (timeRemaining < 0)
         {
             SceneManager.LoadScene(0);
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         /*
          * ----------    Faz todas as folhas "balançar"   ----------
-         * 
+         *
         int i = 4;
         for (i = 4; i > 0; i--)
         {
@@ -119,7 +120,7 @@ public class GameManager : MonoBehaviour
         /*
          *----------    Faz apenas a folha "atual" "balançar"   ----------
          */
-        
+
         int i = 4;
         for (i = 4; i > 0; i--)
         {
