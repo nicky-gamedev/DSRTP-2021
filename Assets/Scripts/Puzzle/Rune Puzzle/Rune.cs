@@ -37,6 +37,7 @@ public class Rune : MonoBehaviour
         GameObject go = Instantiate(runePrefab, transform);
         go.transform.position += Vector3.up * 2;
         go.transform.localScale = new Vector3(.3f, .3f, .3f);
+        go.transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
     private void OnTriggerEnter(Collider other)
